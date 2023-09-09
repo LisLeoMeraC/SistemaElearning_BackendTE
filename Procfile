@@ -1,1 +1,1 @@
-web: java -jar target/SistemaElearningBackendApplication-1.0.0-SNAPSHOT.jar
+web: java -jar target/sistema-elearning-backend-0.0.1-SNAPSHOT.jar
