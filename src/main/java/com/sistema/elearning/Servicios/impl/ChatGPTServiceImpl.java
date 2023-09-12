@@ -49,6 +49,9 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         headers.set("Authorization", "Bearer " + openaiApiKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        System.out.println("Intentando comunicarse con OpenAI...");  // Log 1
+        System.out.println("Usando la API Key: " + openaiApiKey);
+
         Map<String, Object> body = new HashMap<>();
         body.put("model", "gpt-3.5-turbo");
         List<Map<String, String>> messages = new ArrayList<>();
