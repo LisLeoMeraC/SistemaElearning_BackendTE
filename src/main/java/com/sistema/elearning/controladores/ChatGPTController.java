@@ -19,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/chatgpt")
+@CrossOrigin("*")
 public class ChatGPTController {
 
     @Autowired
