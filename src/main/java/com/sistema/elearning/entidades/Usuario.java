@@ -42,13 +42,16 @@ public class Usuario implements UserDetails {
     @JsonIgnore
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
+
+
     public Usuario(){
 
     }
 
-    public Usuario(Long id, String username, String password, String nombre, String apellido, String email, String telefono, String identidad, boolean enabled, String perfil) {
+    public Usuario(Long id, String username, String rolFormulario, String password, String nombre, String apellido, String email, String telefono, String identidad, boolean enabled, String perfil, Set<UsuarioRol> usuarioRoles) {
         this.id = id;
         this.username = username;
+        this.rolFormulario = rolFormulario;
         this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -57,6 +60,7 @@ public class Usuario implements UserDetails {
         this.identidad = identidad;
         this.enabled = enabled;
         this.perfil = perfil;
+        this.usuarioRoles = usuarioRoles;
     }
 
     public Long getId() {
@@ -66,6 +70,7 @@ public class Usuario implements UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getUsername() {
         return username;

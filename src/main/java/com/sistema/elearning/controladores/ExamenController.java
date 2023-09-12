@@ -1,9 +1,14 @@
 package com.sistema.elearning.controladores;
 import com.sistema.elearning.Servicios.ExamenService;
+import com.sistema.elearning.Servicios.UsuarioService;
+import com.sistema.elearning.Servicios.impl.UsuarioServiceImpl;
 import com.sistema.elearning.entidades.Categoria;
 import com.sistema.elearning.entidades.Examen;
+import com.sistema.elearning.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -15,11 +20,25 @@ public class ExamenController {
 
     @Autowired
     private ExamenService examenService;
-
+    @Autowired
+    private UsuarioService usuarioService;
     @PostMapping("/")
     public ResponseEntity<Examen> guardarExamen(@RequestBody Examen examen){
+      //  Usuario usuarioLogueado= getUsuarioActual();
+      //  examen.setUsuario(usuarioLogueado);
         return ResponseEntity.ok(examenService.agregarExamen(examen));
     }
+
+
+
+    //obtener el id del usuario que se loguea
+/*    private Usuario getUsuarioActual() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String nombreUsuario = auth.getName();
+        return usuarioService.obtenerUsuario(nombreUsuario);
+    }
+*/
+
 
     @PutMapping("/")
     public ResponseEntity<Examen> actualizarExamen(@RequestBody Examen examen){

@@ -39,25 +39,7 @@ public class UsuarioController {
         usuario_roles.add(usuarioRol);
         return usuarioService.registrarUsuario(usuario, usuario_roles);
     }
-  /*  @PostMapping("/teacher")
-    public Usuario guardarUsuarioDocente(@RequestBody Usuario usuario)throws Exception{
 
-        usuario.setPerfil("default.png");
-
-        Set<UsuarioRol>usuario_roles= new HashSet<>();
-        Rol rol= new Rol();
-        rol.setRolID(2L);
-        rol.setRolNombre("Admin");
-
-        UsuarioRol usuarioRol= new UsuarioRol();
-        usuarioRol.setUsuario(usuario);
-        usuarioRol.setRol(rol);
-
-        //Para agregar en la tabla usuario_rol cuando el usuario se registra
-        usuario_roles.add(usuarioRol);
-        return usuarioService.registrarUsuario(usuario,usuario_roles);
-
-    }*/
     @GetMapping("/{username}")
     public Usuario obtenerUsuario(@PathVariable("username") String username){
         return usuarioService.obtenerUsuario(username);

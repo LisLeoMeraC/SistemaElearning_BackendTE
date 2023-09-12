@@ -23,12 +23,16 @@ public class Examen {
     @ManyToOne(fetch = FetchType.EAGER)
     private Categoria categoria;
 
+
+
+
     @OneToMany(mappedBy = "examen", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Pregunta> preguntas = new HashSet<>();
 
     public Examen() {
     }
+
 
     public Examen(Long examenId, String titulo, String descripcion, String puntosMaximos, String numeroDePreguntas, boolean activo, Categoria categoria, Set<Pregunta> preguntas) {
         this.examenId = examenId;
@@ -104,4 +108,6 @@ public class Examen {
     public void setPreguntas(Set<Pregunta> preguntas) {
         this.preguntas = preguntas;
     }
+
+
 }

@@ -9,7 +9,7 @@ public interface UsuarioService {
 
     public Usuario registrarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRols) throws Exception;
 
-    public Usuario obtenerUsuario(String username);
+    public  Usuario obtenerUsuario(String username);
 
     public void eliminarUsuario(Long usuarioID);
 
