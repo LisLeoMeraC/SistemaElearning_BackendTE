@@ -36,7 +36,7 @@ import java.util.Map;
 @Service
 public class ChatGPTServiceImpl implements ChatGPTService {
 
-    @Value("${openai.apikey}")
+    @Value("${OPENAI_API_KEY}")
     private String openaiApiKey;
 
     private final String baseUrl = "https://api.openai.com/v1/chat/completions";  // URL de la API de OpenAI
