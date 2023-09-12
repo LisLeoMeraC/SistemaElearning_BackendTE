@@ -25,17 +25,7 @@ public class SistemaElearningBackendApplication implements CommandLineRunner{
 	@Configuration
 	public class MyConfiguration {
 
-		@Bean
-		public WebMvcConfigurer corsConfigurer() {
-			return new WebMvcConfigurer() {
-				@Override
-				public void addCorsMappings(CorsRegistry registry) {
-					registry.addMapping("/**")
-							.allowedOrigins("https://educomputeai.netlify.app/")
-							.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
-				}
-			};
-		}
+
 	}
 
 
