@@ -1,7 +1,6 @@
 package com.sistema.elearning.seguridades;
 
 import com.sistema.elearning.Servicios.impl.UserDetailsServiceImpl;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +47,17 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 
-
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));  // Permite cualquier dominio. Ajustar según tus necesidades.
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true); // En caso de que necesites enviar cookies.
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -60,8 +69,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf()
                 .disable()
-                .cors()
-                .disable()
+                .cors()   // <-- Activa CORS usando la configuración que definimos.
+                .and()
                 .authorizeRequests()
                 .antMatchers("/generate-token","/usuarios/").permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
@@ -73,5 +82,4 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
 }
