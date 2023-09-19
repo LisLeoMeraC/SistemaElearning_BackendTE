@@ -28,13 +28,15 @@ public class Pregunta {
 
         private String respuesta;
 
+        private String url;
+
         @ManyToOne(fetch = FetchType.EAGER)
         private Examen examen;
 
     public Pregunta() {
     }
 
-    public Pregunta(Long preguntaId, String contenido, String imagen, String opcion1, String opcion2, String opcion3, String opcion4, String respuestaDada, String respuesta, Examen examen) {
+    public Pregunta(Long preguntaId, String contenido, String imagen, String opcion1, String opcion2, String opcion3, String opcion4, String respuestaDada, String respuesta,String url, Examen examen) {
         this.preguntaId = preguntaId;
         this.contenido = contenido;
         this.imagen = imagen;
@@ -44,6 +46,7 @@ public class Pregunta {
         this.opcion4 = opcion4;
         this.respuestaDada = respuestaDada;
         this.respuesta = respuesta;
+        this.url=url;
         this.examen = examen;
     }
 
@@ -117,6 +120,14 @@ public class Pregunta {
 
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Examen getExamen() {
