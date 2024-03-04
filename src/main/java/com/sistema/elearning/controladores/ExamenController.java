@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.*;
 
 @RestController
@@ -24,8 +25,8 @@ public class ExamenController {
     private UsuarioService usuarioService;
     @PostMapping("/")
     public ResponseEntity<Examen> guardarExamen(@RequestBody Examen examen){
-      //  Usuario usuarioLogueado= getUsuarioActual();
-      //  examen.setUsuario(usuarioLogueado);
+        //  Usuario usuarioLogueado= getUsuarioActual();
+        //  examen.setUsuario(usuarioLogueado);
         return ResponseEntity.ok(examenService.agregarExamen(examen));
     }
 
@@ -63,7 +64,7 @@ public class ExamenController {
     @GetMapping("/categoria/{categoriaId}")
     public List<Examen> listarExamenesDeUnaCategoria(@PathVariable("categoriaId") Long categoriaId){
         Categoria categoria = new Categoria();
-        categoria.setCategoriaId(categoriaId);
+        categoria.setId(categoriaId);
         return examenService.listarExamenesDeUnaCategoria(categoria);
     }
 
@@ -75,7 +76,7 @@ public class ExamenController {
     @GetMapping("/categoria/activo/{categoriaId}")
     public List<Examen> listarExamenesActivosDeUnaCategoria(@PathVariable("categoriaId") Long categoriaId){
         Categoria categoria = new Categoria();
-        categoria.setCategoriaId(categoriaId);
+        categoria.setId(categoriaId);
         return examenService.obtenerExamenesActivosDeUnaCategoria(categoria);
     }
 }

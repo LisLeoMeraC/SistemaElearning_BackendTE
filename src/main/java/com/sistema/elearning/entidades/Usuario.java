@@ -1,6 +1,9 @@
 package com.sistema.elearning.entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
+
 public class Usuario implements UserDetails {
 
     @Id

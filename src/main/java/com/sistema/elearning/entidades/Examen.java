@@ -26,6 +26,9 @@ public class Examen {
 
 
 
+
+
+
     @OneToMany(mappedBy = "examen", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Pregunta> preguntas = new HashSet<>();
@@ -43,6 +46,7 @@ public class Examen {
         this.activo = activo;
         this.categoria = categoria;
         this.preguntas = preguntas;
+
     }
 
     public Long getExamenId() {

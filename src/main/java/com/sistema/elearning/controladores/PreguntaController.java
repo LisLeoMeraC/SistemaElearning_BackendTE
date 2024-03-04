@@ -68,18 +68,35 @@ public class PreguntaController {
         double puntosMaximos = 0;
         Integer respuestasCorrectas = 0;
         Integer intentos = 0;
-        double puntosPorPregunta = Double.parseDouble(preguntas.get(0).getExamen().getPuntosMaximos()) / preguntas.size();
+
+        // Validar si la lista de preguntas está vacía
+        if (preguntas.isEmpty()) {
+            return ResponseEntity.badRequest().body("La lista de preguntas está vacía");
+        }
+
+        // Obtener el examen asociado a la primera pregunta
+        Examen examen = preguntas.get(0).getExamen();
+        double puntosPorPregunta = Double.parseDouble(examen.getPuntosMaximos()) / preguntas.size();
 
         List<Pregunta> preguntasIncorrectas = new ArrayList<>();
 
         for (Pregunta p : preguntas) {
-            Pregunta pregunta = this.preguntaService.listarPregunta(p.getPreguntaId());
-            if (pregunta != null && pregunta.getRespuesta().equals(p.getRespuestaDada())) {
+            Pregunta pregunta = preguntaService.listarPregunta(p.getPreguntaId());
+
+            // Validar si la pregunta existe
+            if (pregunta == null) {
+                return ResponseEntity.badRequest().body("La pregunta con ID " + p.getPreguntaId() + " no existe");
+            }
+
+            // Evaluar si la respuesta es correcta
+            if (pregunta.getRespuesta().equals(p.getRespuestaDada())) {
                 respuestasCorrectas++;
                 puntosMaximos += puntosPorPregunta;
             } else {
                 preguntasIncorrectas.add(pregunta);
             }
+
+            // Contar los intentos solo si se ha dado una respuesta
             if (p.getRespuestaDada() != null) {
                 intentos++;
             }

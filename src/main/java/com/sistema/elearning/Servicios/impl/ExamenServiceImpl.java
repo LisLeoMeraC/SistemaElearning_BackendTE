@@ -3,6 +3,7 @@ package com.sistema.elearning.Servicios.impl;
 import com.sistema.elearning.Servicios.ExamenService;
 import com.sistema.elearning.entidades.Categoria;
 import com.sistema.elearning.entidades.Examen;
+import com.sistema.elearning.entidades.Usuario;
 import com.sistema.elearning.repositorios.ExamenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

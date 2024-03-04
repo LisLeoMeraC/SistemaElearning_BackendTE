@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ArchivoService {
-    void subirArchivos(MultipartFile file,Long categoriaId);
+    void subirArchivo(MultipartFile file,Long categoriaId);
     byte[] descargarArchivo(Long id);
 
     void eliminarArchivo(Long id);

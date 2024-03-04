@@ -38,4 +38,34 @@ public class ChatGPTController {
             return ResponseEntity.status(500).body("Internal Server Error");
         }
     }
+
+    @PostMapping("/generate-contenido")
+    public ResponseEntity<?> generateContenido(@RequestBody Map<String, String> requestBody) {
+        try {
+            String tema = requestBody.get("tema");
+            String asignatura=requestBody.get("asignatura");
+            String response = chatGPTService.generateContenido(tema,asignatura);
+            return ResponseEntity.ok(response);
+        } catch (HttpClientErrorException.TooManyRequests e) {
+            return ResponseEntity.status(429).body("Too many requests to OpenAI API");
+        } catch (Exception e) {
+            // Aquí puedes manejar otros errores inesperados si lo consideras necesario.
+            return ResponseEntity.status(500).body("Internal Server Error");
+        }
+    }
+
+    @PostMapping("/generate-contenido2")
+    public ResponseEntity<?> generateContenido2(@RequestBody Map<String, String> requestBody) {
+        try {
+            String tema = requestBody.get("tema");
+            String asignatura=requestBody.get("asignatura");
+            String response = chatGPTService.generateContenidoMapa2(tema,asignatura);
+            return ResponseEntity.ok(response);
+        } catch (HttpClientErrorException.TooManyRequests e) {
+            return ResponseEntity.status(429).body("Too many requests to OpenAI API");
+        } catch (Exception e) {
+            // Aquí puedes manejar otros errores inesperados si lo consideras necesario.
+            return ResponseEntity.status(500).body("Internal Server Error");
+        }
+    }
 }

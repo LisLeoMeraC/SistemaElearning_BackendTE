@@ -2,6 +2,7 @@ package com.sistema.elearning.Servicios;
 
 import com.sistema.elearning.entidades.Categoria;
 import com.sistema.elearning.entidades.Examen;
+import com.sistema.elearning.entidades.Usuario;
 
 import java.util.List;
 import java.util.Set;

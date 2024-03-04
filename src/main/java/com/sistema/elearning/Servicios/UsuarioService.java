@@ -13,6 +13,9 @@ public interface UsuarioService {
 
     public void eliminarUsuario(Long usuarioID);
 
+    //Obtener el id del usuario
+    public Long obtenerIdUsuarioPorUsername(String username);
+
 
 
 

@@ -46,4 +46,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.deleteById(usuarioID);
 
     }
+
+    @Override
+    public Long obtenerIdUsuarioPorUsername(String username) {
+        Usuario usuario = obtenerUsuario(username);
+        if (usuario != null) {
+            return usuario.getId(); // Suponiendo que hay un método getId() en la entidad Usuario
+        }
+        return null; // Si el usuario no se encuentra
+    }
+
 }
