@@ -89,8 +89,8 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         Map<String, String> message = new HashMap<>();
         message.put("role", "user");
         message.put("content", "Actua como experto en resumir un tema: quiero que me des un resumen de lo mas importante sobre el \n" +
-                "      tema "+tema+" relacionado a la asignatura "+asignatura+" donde haya cinco parrafos de 50 palabras cada uno de los parrafos:el primer parrafo que hable sobre un concepto general" +
-                ", y los otro parrafos sobre algo importante, puede ser la importancias, entre otras cosas. el quinto parrafo quiero que hable sobre algun hecho importante o ejemplos de como usarlo. Ese ultimo parrafo tienes que ver a cual mejor se adapta en base al tema dado");
+                "      tema "+tema+" relacionado a la asignatura "+asignatura+" donde haya cinco parrafos de 35 palabras cada uno de los parrafos:el primer parrafo que hable sobre un concepto general" +
+                ", y los otro parrafos sobre algo importante, puede ser la importancias, entre otras cosas. el quinto parrafo quiero que hable sobre algun hecho importante o ejemplos de como usarlo. Ese ultimo parrafo tienes que ver a cual mejor se adapta en base al tema dado. cada parrafo debe contener informacion clara, especifica y consisa, no utlizar conectores");
         messages.add(message);
         body.put("messages", messages);
 
@@ -122,7 +122,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         message.put("role", "user");
         message.put("content", "hazme un resumen detallado sobre el tema "+tema+" para una asignatura de "+asignatura+"\n" +
                 "                hazme 6 parrafos y cada parrafo debe tener como titulo un subtema no tan largo y\n" +
-                "                cada parrafo debe estar el parrafo de 45 palabras cada uno de los parrafos pero sin \n" +
+                "                cada parrafo debe estar el parrafo de 35 palabras cada uno de los parrafos con informacion especifica, sin nada de conectores pero sin \n" +
                 "                mostrar un mensaje introductorio. la informacion se mostrara de la siguiente forma: " +
                 "subtema1 pero sin la palabra subtema 1" +
                 "descipcion del subtema1" +
