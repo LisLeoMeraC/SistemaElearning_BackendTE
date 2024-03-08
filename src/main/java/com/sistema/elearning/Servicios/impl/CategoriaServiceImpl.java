@@ -50,7 +50,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoria.setId(categoriaId);
         categoriaRepository.delete(categoria);
     }
-
+//probando
     @Override
     public Set<Categoria> obtenerCategoriasPorUsuario(String username) {
         Long userId = usuarioService.obtenerIdUsuarioPorUsername(username);
