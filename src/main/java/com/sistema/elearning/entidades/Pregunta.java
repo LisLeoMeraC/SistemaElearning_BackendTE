@@ -49,7 +49,7 @@ public class Pregunta {
         this.opcion4 = opcion4;
         this.respuestaDada = respuestaDada;
         this.respuesta = respuesta;
-        //cambiar justificacion
+        //cambiar justificacion para tener observacion
         this.justificacion = justificacion;
         this.url = url;
         this.examen = examen;
