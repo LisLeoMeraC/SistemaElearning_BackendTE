@@ -57,9 +57,16 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> message = new HashMap<>();
         message.put("role", "user");
-        message.put("content", "Piensa como profesor de secundaria: Hazme una pregunta con 4 opciones pero con texto no muy largos mas la respuesta que diga: \n" +
-                "    Respuesta:  sobre el tema de " + tema+". ademas proporciona una referencia valida de la web, es decir la url sobre el tema de la pregunta generada" +
-                " diciendo URL: ");
+        message.put("content", "Actua como experto en crear preguntas de opcion multiple relacionado al tema de "+tema+". Quiero una pregunta que tenga el siguiente formato:\n" +
+                "Pregunta: contenido de la pregunta\n" +
+                "a) contenido de la opcion 1\n" +
+                "b) contenido de la opcion 2\n" +
+                "c) contenido de la opcion 3\n" +
+                "d) contenido de la opcion 4\n" +
+                "Respuesta:  letra del literal) contenido de la respuesta\n" +
+                "Argumentacion:  una breve argumentación sobre porque es la resspuesta de la respuesta. en el caso de un ejercicio, resuelvelo lo corto posible sin salto del lineas\n" +
+                "URL: url  de wikipedia sobre la respuesta \n" +
+                "-quiero que la respuesta se muestre alternando los literales, es decir que la respuesta debe aparecer ya sea en en la b, c o d, pero no quiero que seimpre muestre la respuesta en la a - y que no se repita la respuesta en la siguiente pregunta cuando se el usuario haga la peitcion.");
         messages.add(message);
         body.put("messages", messages);
 
@@ -120,15 +127,16 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> message = new HashMap<>();
         message.put("role", "user");
-        message.put("content", "hazme un resumen detallado sobre el tema "+tema+" para una asignatura de "+asignatura+"\n" +
-                "                hazme 6 parrafos y cada parrafo debe tener como titulo un subtema no tan largo y\n" +
-                "                cada parrafo debe estar el parrafo de 35 palabras cada uno de los parrafos con informacion especifica, sin nada de conectores pero sin \n" +
-                "                mostrar un mensaje introductorio. la informacion se mostrara de la siguiente forma: " +
-                "subtema1 pero sin la palabra subtema 1" +
-                "descipcion del subtema1" +
-                "subtema2 pero sin la palabra subtema 2" +
-                "descripcion del subtema2" +
-                "y asi sucesivamente" );
+        message.put("content", "hazme un resumen con palabras especificas sin nada de conectores sobre el tema"+tema+" relacionado a la asignatura de"+asignatura+" siguiendo al pie de la letra las siguientes condicciones:\n" +
+                "- No mostrar parrafo introductorio\n" +
+                "- 6 parrafos y cada parrafo debe tener como titulo un subtema no tan largo.\n" +
+                "- Cada parrafo debe contener 30 palabras exactamente.\n" +
+                "- Cada parrafo debe contener texto especifico, no usar conectores, ni texto introductorio, directo al contexto.\n" +
+                "A continuación, te muestro el formato de como quiero que se muestre la respuesta:\n" +
+                "nombre del subtema 1 (es sustituido por el subtema)\n" +
+                "descripción del parrafo 1 (es sustituido por el contenido generado)\n" +
+                "nombre del subtema 2\n" +
+                "descripcion del parrafo 2" );
         messages.add(message);
         body.put("messages", messages);
 

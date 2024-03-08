@@ -28,6 +28,9 @@ public class Pregunta {
 
         private String respuesta;
 
+        @Column(length = 5000)
+        private  String justificacion;
+
         private String url;
 
         @ManyToOne(fetch = FetchType.EAGER)
@@ -36,7 +39,7 @@ public class Pregunta {
     public Pregunta() {
     }
 
-    public Pregunta(Long preguntaId, String contenido, String imagen, String opcion1, String opcion2, String opcion3, String opcion4, String respuestaDada, String respuesta,String url, Examen examen) {
+    public Pregunta(Long preguntaId, String contenido, String imagen, String opcion1, String opcion2, String opcion3, String opcion4, String respuestaDada, String respuesta, String justificacion, String url, Examen examen) {
         this.preguntaId = preguntaId;
         this.contenido = contenido;
         this.imagen = imagen;
@@ -46,7 +49,8 @@ public class Pregunta {
         this.opcion4 = opcion4;
         this.respuestaDada = respuestaDada;
         this.respuesta = respuesta;
-        this.url=url;
+        this.justificacion = justificacion;
+        this.url = url;
         this.examen = examen;
     }
 
@@ -122,6 +126,14 @@ public class Pregunta {
         this.respuesta = respuesta;
     }
 
+    public String getJustificacion() {
+        return justificacion;
+    }
+
+    public void setJustificacion(String justificacion) {
+        this.justificacion = justificacion;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -137,6 +149,4 @@ public class Pregunta {
     public void setExamen(Examen examen) {
         this.examen = examen;
     }
-
-
 }
