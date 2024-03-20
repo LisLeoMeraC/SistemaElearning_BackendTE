@@ -5,6 +5,7 @@ import com.sistema.elearning.Servicios.UsuarioCategoriaService;
 import com.sistema.elearning.Servicios.UsuarioService;
 import com.sistema.elearning.entidades.Categoria;
 import com.sistema.elearning.entidades.Usuario;
+import com.sistema.elearning.entidades.UsuarioCategoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +69,6 @@ public class CategoriaController {
 
         return ResponseEntity.ok("Categoria asignada correctamente");
     }
-
 
     @GetMapping("/usuario-logueado")
     public ResponseEntity<?> listarCategoriasUsuarioLogueado(Principal principal) {
