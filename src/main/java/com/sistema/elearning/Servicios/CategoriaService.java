@@ -20,4 +20,7 @@ public interface CategoriaService {
     void eliminarCategoria(Long categoriaId);
 
     Set<Categoria> obtenerCategoriasPorUsuario(String username);
+
+
+    Categoria obtenerCategoriaPorCodigo(String codigoAcceso);
 }

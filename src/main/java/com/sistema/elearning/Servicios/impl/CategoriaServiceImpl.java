@@ -1,5 +1,6 @@
 package com.sistema.elearning.Servicios.impl;
 
+import com.sistema.elearning.Excepciones.ResourceNotFoundException;
 import com.sistema.elearning.Servicios.CategoriaService;
 import com.sistema.elearning.Servicios.UsuarioService;
 import com.sistema.elearning.entidades.Categoria;
@@ -50,12 +51,18 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoria.setId(categoriaId);
         categoriaRepository.delete(categoria);
     }
-//probando
+    //probando
     @Override
     public Set<Categoria> obtenerCategoriasPorUsuario(String username) {
         Long userId = usuarioService.obtenerIdUsuarioPorUsername(username);
         return categoriaRepository.findByUsuarioid(userId);
     }
 
+    @Override
+    public Categoria obtenerCategoriaPorCodigo(String codigoAcceso) {
+        return categoriaRepository.findByUniqueCode(codigoAcceso).orElseThrow(
+                () -> new ResourceNotFoundException("Categoria no encontrada con codigo de acceso: " + codigoAcceso)
+        );
+    }
 
 }

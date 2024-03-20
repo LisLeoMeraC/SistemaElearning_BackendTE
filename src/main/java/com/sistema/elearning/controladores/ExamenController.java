@@ -79,4 +79,13 @@ public class ExamenController {
         categoria.setId(categoriaId);
         return examenService.obtenerExamenesActivosDeUnaCategoria(categoria);
     }
+
+
+    //Listarexamenes por usuario
+    @GetMapping("/usuario")
+    public ResponseEntity<?> listarExamenesPorUsuario(Principal principal) {
+        String username = principal.getName();
+        List<Examen> examenes = examenService.obtenerExamenesPorUsuario(username);
+        return ResponseEntity.ok(examenes);
+    }
 }

@@ -7,18 +7,23 @@ import com.sistema.elearning.entidades.UsuarioRol;
 import com.sistema.elearning.repositorios.RolRepository;
 import com.sistema.elearning.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Set;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
-
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
     private RolRepository rolRepository;
+
 
     @Override
     public Usuario registrarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRols) throws Exception {
@@ -54,6 +59,22 @@ public class UsuarioServiceImpl implements UsuarioService {
             return usuario.getId(); // Suponiendo que hay un método getId() en la entidad Usuario
         }
         return null; // Si el usuario no se encuentra
+    }
+
+    @Override
+    public Usuario obtenerUsuarioActual(Principal principal) {
+        if (SecurityContextHolder.getContext().getAuthentication() == null ||
+                !SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+            throw new AuthenticationCredentialsNotFoundException("Usuario no autenticado");
+        }
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Usuario usuario = usuarioRepository.findByUsername(userDetails.getUsername());
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
+        }
+        return usuario;
     }
 
 }

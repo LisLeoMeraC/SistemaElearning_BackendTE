@@ -23,4 +23,8 @@ public interface ExamenService {
     List<Examen> obtenerExamenesActivos();
 
     List<Examen> obtenerExamenesActivosDeUnaCategoria(Categoria categoria);
+
+
+    //filtrar examenes por docente
+    List<Examen> obtenerExamenesPorUsuario(String username);
 }
