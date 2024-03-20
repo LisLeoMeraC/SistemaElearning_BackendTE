@@ -69,6 +69,7 @@ public class CategoriaController {
         return ResponseEntity.ok("Categoria asignada correctamente");
     }
 
+
     @GetMapping("/usuario-logueado")
     public ResponseEntity<?> listarCategoriasUsuarioLogueado(Principal principal) {
         String username = principal.getName();
