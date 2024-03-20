@@ -6,15 +6,19 @@ com\sistema\elearning\Servicios\CategoriaService.class
 com\sistema\elearning\controladores\CategoriaController.class
 com\sistema\elearning\seguridades\MySecurityConfig.class
 com\sistema\elearning\repositorios\ExamenRepository.class
+com\sistema\elearning\Servicios\impl\UsuarioCategoriaServiceImpl.class
 com\sistema\elearning\entidades\Categoria.class
 com\sistema\elearning\repositorios\CategoriaRepository.class
 com\sistema\elearning\seguridades\JwtAuthenticationFilter.class
+com\sistema\elearning\Excepciones\ResourceNotFoundException.class
 com\sistema\elearning\repositorios\RespuestaUsuarioRepository.class
+com\sistema\elearning\repositorios\UsuarioCategoriaRepository.class
 com\sistema\elearning\Servicios\impl\ArchivoServiceoImpl.class
 com\sistema\elearning\controladores\UsuarioController.class
 com\sistema\elearning\entidades\UsuarioRol.class
 com\sistema\elearning\controladores\PreguntaController.class
 com\sistema\elearning\repositorios\RolRepository.class
+com\sistema\elearning\Servicios\UsuarioCategoriaService.class
 com\sistema\elearning\Servicios\ArchivoService.class
 com\sistema\elearning\Servicios\ChatGPTService.class
 com\sistema\elearning\entidades\Usuario.class
@@ -23,6 +27,7 @@ com\sistema\elearning\ServletInitializer.class
 com\sistema\elearning\controladores\ExamenController.class
 com\sistema\elearning\Servicios\impl\ExamenServiceImpl.class
 com\sistema\elearning\repositorios\UsuarioRepository.class
+com\sistema\elearning\entidades\UsuarioCategoria.class
 com\sistema\elearning\repositorios\PreguntaRepository.class
 com\sistema\elearning\Servicios\ExamenService.class
 com\sistema\elearning\seguridades\JwtAuthenticationEntryPoint.class
