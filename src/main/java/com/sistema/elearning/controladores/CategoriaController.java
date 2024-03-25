@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/categoria")
@@ -62,12 +64,15 @@ public class CategoriaController {
     @PostMapping("/verificar")
     public ResponseEntity<?> verificarCodigoAcceso(@RequestParam("codigoAcceso") String codigoAcceso, Principal principal) {
         Categoria categoria = categoriaService.obtenerCategoriaPorCodigo(codigoAcceso);
-        Usuario usuario = usuarioService.obtenerUsuarioActual(principal); // Asumo que tienes método para esto
+        Usuario usuario = usuarioService.obtenerUsuarioActual(principal);
 
         // Asignar la categoría al usuario:
         usuarioCategoriaService.agregarAsignacion(categoria.getId(), usuario.getId());
 
-        return ResponseEntity.ok("Categoria asignada correctamente");
+        // Devolver un objeto JSON con un mensaje de éxito
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Código verificado correctamente");
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/usuario-logueado")

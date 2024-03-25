@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -60,9 +61,12 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public Categoria obtenerCategoriaPorCodigo(String codigoAcceso) {
-        return categoriaRepository.findByUniqueCode(codigoAcceso).orElseThrow(
-                () -> new ResourceNotFoundException("Categoria no encontrada con codigo de acceso: " + codigoAcceso)
-        );
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByUniqueCode(codigoAcceso);
+        if (categoriaOptional.isPresent()) {
+            return categoriaOptional.get();
+        } else {
+            throw new RuntimeException("Categoria no encontrada con código de acceso: " + codigoAcceso);
+        }
     }
 
 }

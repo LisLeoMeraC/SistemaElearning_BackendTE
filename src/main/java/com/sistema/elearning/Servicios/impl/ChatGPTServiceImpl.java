@@ -96,8 +96,9 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         Map<String, String> message = new HashMap<>();
         message.put("role", "user");
         message.put("content", "Actua como experto en resumir un tema: quiero que me des un resumen de lo mas importante sobre el \n" +
-                "      tema "+tema+" relacionado a la asignatura "+asignatura+" donde haya cinco parrafos de 35 palabras cada uno de los parrafos:el primer parrafo que hable sobre un concepto general" +
-                ", y los otro parrafos sobre algo importante, puede ser la importancias, entre otras cosas. el quinto parrafo quiero que hable sobre algun hecho importante o ejemplos de como usarlo. Ese ultimo parrafo tienes que ver a cual mejor se adapta en base al tema dado. cada parrafo debe contener informacion clara, especifica y consisa, no utlizar conectores");
+                "      tema "+tema+" relacionado a la asignatura "+asignatura+" donde haya cinco parrafos de 25 palabras cada uno de los parrafos:el primer parrafo que hable sobre un concepto general" +
+                ", y los otro parrafos sobre algo importante, puede ser la importancias, entre otras cosas. el quinto parrafo quiero que hable sobre algun hecho importante o ejemplos de como usarlo. Ese ultimo parrafo tienes que ver a cual mejor se adapta en base al tema dado." +
+                "cada parrafo debe contener informacion clara, especifica y consisa, no utlizar conectores, solo mostrar las paralabras relavantes sobre el subtema maximo 25 palabras por parrafo");
         messages.add(message);
         body.put("messages", messages);
 
@@ -129,12 +130,12 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         message.put("role", "user");
         message.put("content", "hazme un resumen con palabras especificas sin nada de conectores sobre el tema"+tema+" relacionado a la asignatura de"+asignatura+" siguiendo al pie de la letra las siguientes condicciones:\n" +
                 "- No mostrar parrafo introductorio\n" +
-                "- 6 parrafos y cada parrafo debe tener como titulo un subtema no tan largo.\n" +
-                "- Cada parrafo debe contener 30 palabras exactamente.\n" +
+                "- 6 parrafos y cada parrafo debe tener como titulo un subtema de tres palabras.\n" +
+                "- Cada parrafo debe contener 20 palabras exactamente.\n" +
                 "- Cada parrafo debe contener texto especifico, no usar conectores, ni texto introductorio, directo al contexto.\n" +
                 "A continuación, te muestro el formato de como quiero que se muestre la respuesta:\n" +
-                "nombre del subtema 1 (es sustituido por el subtema)\n" +
-                "descripción del parrafo 1 (es sustituido por el contenido generado)\n" +
+                "nombre del subtema 1 (es sustituido por el subtema. No mostrar * en el subtema. maximo 3 palabras por cada subtema)\n" +
+                "descripción del parrafo 1 (es sustituido por el contenido generado. cada parrafo debe contener 25 palabras)\n" +
                 "nombre del subtema 2\n" +
                 "descripcion del parrafo 2" );
         messages.add(message);

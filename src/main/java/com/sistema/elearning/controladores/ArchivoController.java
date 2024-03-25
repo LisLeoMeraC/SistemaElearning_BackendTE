@@ -2,11 +2,15 @@ package com.sistema.elearning.controladores;
 
 import com.sistema.elearning.Servicios.ArchivoService;
 import com.sistema.elearning.entidades.Archivo;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -33,5 +37,16 @@ public class ArchivoController {
     public ResponseEntity<List<Archivo>> obtenerArchivosPorCategoria(@PathVariable Long categoriaId) {
         List<Archivo> archivos = archivoService.obtenerArchivosPorCategoria(categoriaId);
         return new ResponseEntity<>(archivos, HttpStatus.OK);
+    }
+
+    @GetMapping("{id}/descargar")
+    public ResponseEntity<byte[]> descargarArchivo(@PathVariable Long id) {
+        byte[] contenido = archivoService.descargarArchivo(id);
+        Archivo archivo = archivoService.obtenerArchivoPorId(id);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(archivo.getTipoArchivo()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + archivo.getNombreArchivo() + "\"")
+                .body(contenido);
     }
 }

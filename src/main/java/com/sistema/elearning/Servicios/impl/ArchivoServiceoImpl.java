@@ -53,4 +53,9 @@ public class ArchivoServiceoImpl implements ArchivoService {
     public List<Archivo> obtenerArchivosPorCategoria(Long categoriaId) {
         return archivoRepository.findByCategoriaId(categoriaId);
     }
+
+    @Override
+    public Archivo obtenerArchivoPorId(Long id) {
+        return archivoRepository.findById(id).orElseThrow(() -> new RuntimeException("Archivo no encontrado"));
+    }
 }

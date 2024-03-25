@@ -12,4 +12,7 @@ public interface ArchivoService {
     void eliminarArchivo(Long id);
 
     List<Archivo> obtenerArchivosPorCategoria(Long categoriaId);
+
+    Archivo obtenerArchivoPorId(Long id);
 }
+
