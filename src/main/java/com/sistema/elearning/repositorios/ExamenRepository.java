@@ -1,5 +1,6 @@
 package com.sistema.elearning.repositorios;
 
+import com.sistema.elearning.entidades.Archivo;
 import com.sistema.elearning.entidades.Categoria;
 import com.sistema.elearning.entidades.Examen;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,6 @@ public interface ExamenRepository extends JpaRepository<Examen,Long> {
     List<Examen> findByActivo(Boolean estado);
 
     List<Examen> findByCategoriaAndActivo(Categoria categoria,Boolean estado);
+
+    List<Examen> findByCategoriaId(Long categoriaId);
 }

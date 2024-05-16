@@ -4,6 +4,7 @@ import com.sistema.elearning.Servicios.ExamenService;
 import com.sistema.elearning.Servicios.PreguntaService;
 import com.sistema.elearning.entidades.Examen;
 import com.sistema.elearning.entidades.Pregunta;
+import com.sistema.elearning.repositorios.PreguntaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +20,27 @@ public class PreguntaController {
     private PreguntaService preguntaService;
 
     @Autowired
+    private PreguntaRepository preguntaRepository;
+
+
+    @Autowired
     private ExamenService examenService;
 
     @PostMapping("/")
-    public ResponseEntity<Pregunta> guardarPregunta(@RequestBody Pregunta pregunta) {
+    public ResponseEntity<?> guardarPregunta(@RequestBody Pregunta pregunta) {
+        Long examenId = pregunta.getExamen().getExamenId();
+        int numeroDePreguntasActuales = preguntaRepository.countByExamenId(examenId);
+
+        Examen examen = examenService.obtenerExamen(examenId);
+        int numeroMaximoDePreguntas = examen.getNumeroDePreguntas();
+
+        if (numeroDePreguntasActuales >= numeroMaximoDePreguntas) {
+            return ResponseEntity.badRequest().body("Has alcanzado el número máximo de preguntas para este examen.");
+        }
+        System.out.println("Número de preguntas actuales: " + numeroDePreguntasActuales);
+        System.out.println("Número de preguntas fijas: " + numeroMaximoDePreguntas);
         return ResponseEntity.ok(preguntaService.agregarPregunta(pregunta));
+
     }
 
     @PutMapping("/")
@@ -33,12 +50,14 @@ public class PreguntaController {
 
     @GetMapping("/examen/{examenId}")
     public ResponseEntity<?> listarPreguntasDelExamen(@PathVariable("examenId") Long examenId) {
+        int numeroDePreguntasActuales = preguntaRepository.countByExamenId(examenId);
+        System.out.println("Número de preguntas actuales: " + numeroDePreguntasActuales);
         Examen examen = examenService.obtenerExamen(examenId);
         Set<Pregunta> preguntas = examen.getPreguntas();
 
         List examenes = new ArrayList(preguntas);
-        if (examenes.size() > Integer.parseInt(examen.getNumeroDePreguntas())) {
-            examenes = examenes.subList(0, Integer.parseInt(examen.getNumeroDePreguntas() + 1));
+        if (examenes.size() > examen.getNumeroDePreguntas()) {
+            examenes = examenes.subList(0, examen.getNumeroDePreguntas() + 1);
         }
 
         Collections.shuffle(examenes);

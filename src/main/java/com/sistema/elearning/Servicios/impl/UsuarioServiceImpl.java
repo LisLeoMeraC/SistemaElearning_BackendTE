@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -77,4 +78,25 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    @Override
+    public Usuario actualizarUsuario(Long id, Usuario usuarioActualizado) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+        if (optionalUsuario.isPresent()) {
+            Usuario usuarioExistente = optionalUsuario.get();
+            // Actualiza los campos relevantes del usuario con los nuevos valores
+            usuarioExistente.setNombre(usuarioActualizado.getNombre());
+            usuarioExistente.setApellido(usuarioActualizado.getApellido());
+            usuarioExistente.setEmail(usuarioActualizado.getEmail());
+            usuarioExistente.setTelefono(usuarioActualizado.getTelefono());
+            usuarioExistente.setIdentidad(usuarioActualizado.getIdentidad());
+            // Guarda el usuario actualizado en la base de datos
+            return usuarioRepository.save(usuarioExistente);
+        } else {
+            // Si el usuario no existe, retorna null o lanza una excepción según sea necesario
+            return null;
+        }
+    }
+
+
 }
+

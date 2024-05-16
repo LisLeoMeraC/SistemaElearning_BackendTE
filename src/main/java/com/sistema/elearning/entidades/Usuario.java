@@ -42,6 +42,8 @@ public class Usuario implements UserDetails {
     private boolean enabled = true;
     private String perfil;
 
+
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "usuario")
     @JsonIgnore
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();

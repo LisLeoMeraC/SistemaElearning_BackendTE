@@ -1,5 +1,6 @@
 package com.sistema.elearning.Servicios;
 
+import com.sistema.elearning.entidades.Archivo;
 import com.sistema.elearning.entidades.Categoria;
 import com.sistema.elearning.entidades.Examen;
 import com.sistema.elearning.entidades.Usuario;
@@ -20,6 +21,8 @@ public interface ExamenService {
 
     List<Examen> listarExamenesDeUnaCategoria(Categoria categoria);
 
+
+
     List<Examen> obtenerExamenesActivos();
 
     List<Examen> obtenerExamenesActivosDeUnaCategoria(Categoria categoria);
@@ -27,4 +30,8 @@ public interface ExamenService {
 
     //filtrar examenes por docente
     List<Examen> obtenerExamenesPorUsuario(String username);
+
+
+    List<Examen> obtenerExamenesPorCategoria(Long categoriaId);
+
 }

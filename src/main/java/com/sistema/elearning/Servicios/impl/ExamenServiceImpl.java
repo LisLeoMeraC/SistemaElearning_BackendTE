@@ -3,10 +3,9 @@ package com.sistema.elearning.Servicios.impl;
 import com.sistema.elearning.Servicios.CategoriaService;
 import com.sistema.elearning.Servicios.ExamenService;
 import com.sistema.elearning.Servicios.UsuarioService;
-import com.sistema.elearning.entidades.Categoria;
-import com.sistema.elearning.entidades.Examen;
-import com.sistema.elearning.entidades.Usuario;
+import com.sistema.elearning.entidades.*;
 import com.sistema.elearning.repositorios.ExamenRepository;
+import com.sistema.elearning.repositorios.PreguntaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,9 @@ public class ExamenServiceImpl implements ExamenService {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @Autowired
+    private PreguntaRepository preguntaRepository;
 
     @Override
     public Examen agregarExamen(Examen examen) {
@@ -49,8 +51,15 @@ public class ExamenServiceImpl implements ExamenService {
 
     @Override
     public void eliminarExamen(Long examenId) {
-        Examen examen = new Examen();
-        examen.setExamenId(examenId);
+        Examen examen = examenRepository.findById(examenId)
+                .orElseThrow(() -> new RuntimeException("No se encontró el examen con el ID: " + examenId));
+        Set<Pregunta> preguntas = examen.getPreguntas();
+        if (preguntas != null) {
+            for (Pregunta pregunta : preguntas) {
+                pregunta.setExamen(null);
+                preguntaRepository.delete(pregunta);
+            }
+        }
         examenRepository.delete(examen);
     }
 
@@ -82,6 +91,11 @@ public class ExamenServiceImpl implements ExamenService {
             examenes.addAll(examenesPorCategoria);
         }
         return examenes;
+    }
+
+    @Override
+    public List<Examen> obtenerExamenesPorCategoria(Long categoriaId) {
+        return examenRepository.findByCategoriaId(categoriaId);
     }
 
 

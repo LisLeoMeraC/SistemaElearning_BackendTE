@@ -2,6 +2,7 @@ package com.sistema.elearning.controladores;
 
 import com.sistema.elearning.Servicios.ArchivoService;
 import com.sistema.elearning.entidades.Archivo;
+import com.sistema.elearning.entidades.Examen;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -49,4 +51,22 @@ public class ArchivoController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + archivo.getNombreArchivo() + "\"")
                 .body(contenido);
     }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarArchivosPorUsuario(Principal principal) {
+        String username = principal.getName();
+        List<Archivo> archivos = archivoService.listarArchivos(username);
+        return ResponseEntity.ok(archivos);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarArchivo(@PathVariable Long id) {
+        try {
+            archivoService.eliminarArchivo(id);
+            return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body("Archivo eliminado exitosamente!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.TEXT_PLAIN).body("Error al eliminar archivo: " + e.getMessage());
+        }
+    }
+
 }

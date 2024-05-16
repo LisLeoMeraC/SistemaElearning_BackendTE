@@ -19,37 +19,7 @@ public interface UsuarioService {
 
 
     public Usuario obtenerUsuarioActual(Principal principal);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Usuario actualizarUsuario(Long id, Usuario usuarioActualizado);
 
 
 

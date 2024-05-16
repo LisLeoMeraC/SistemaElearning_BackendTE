@@ -17,7 +17,7 @@ public class Examen {
     private String titulo;
     private String descripcion;
     private String puntosMaximos;
-    private String numeroDePreguntas;
+    private int numeroDePreguntas;
     private boolean activo = false;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -37,7 +37,7 @@ public class Examen {
     }
 
 
-    public Examen(Long examenId, String titulo, String descripcion, String puntosMaximos, String numeroDePreguntas, boolean activo, Categoria categoria, Set<Pregunta> preguntas) {
+    public Examen(Long examenId, String titulo, String descripcion, String puntosMaximos, int numeroDePreguntas, boolean activo, Categoria categoria, Set<Pregunta> preguntas) {
         this.examenId = examenId;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -81,11 +81,12 @@ public class Examen {
         this.puntosMaximos = puntosMaximos;
     }
 
-    public String getNumeroDePreguntas() {
+
+    public int getNumeroDePreguntas() {
         return numeroDePreguntas;
     }
 
-    public void setNumeroDePreguntas(String numeroDePreguntas) {
+    public void setNumeroDePreguntas(int numeroDePreguntas) {
         this.numeroDePreguntas = numeroDePreguntas;
     }
 
@@ -112,6 +113,7 @@ public class Examen {
     public void setPreguntas(Set<Pregunta> preguntas) {
         this.preguntas = preguntas;
     }
+
 
 
 }

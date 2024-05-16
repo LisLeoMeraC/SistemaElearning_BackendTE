@@ -2,10 +2,12 @@ package com.sistema.elearning.controladores;
 import com.sistema.elearning.Servicios.ExamenService;
 import com.sistema.elearning.Servicios.UsuarioService;
 import com.sistema.elearning.Servicios.impl.UsuarioServiceImpl;
+import com.sistema.elearning.entidades.Archivo;
 import com.sistema.elearning.entidades.Categoria;
 import com.sistema.elearning.entidades.Examen;
 import com.sistema.elearning.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,11 +25,21 @@ public class ExamenController {
     private ExamenService examenService;
     @Autowired
     private UsuarioService usuarioService;
+
+
+
+
     @PostMapping("/")
-    public ResponseEntity<Examen> guardarExamen(@RequestBody Examen examen){
-        //  Usuario usuarioLogueado= getUsuarioActual();
-        //  examen.setUsuario(usuarioLogueado);
-        return ResponseEntity.ok(examenService.agregarExamen(examen));
+    public ResponseEntity<Map<String, Object>> guardarExamen(@RequestBody Examen examen){
+        Examen examenGuardado = examenService.agregarExamen(examen);
+        Long idExamenGuardado = examenGuardado.getExamenId(); // Suponiendo que getId() devuelve el ID del examen guardado
+
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("idExamen", idExamenGuardado);
+        respuesta.put("examen", examenGuardado);
+        System.out.println(idExamenGuardado);
+        return ResponseEntity.ok(respuesta);
+
     }
 
 
@@ -61,12 +73,7 @@ public class ExamenController {
         examenService.eliminarExamen(examenId);
     }
 
-    @GetMapping("/categoria/{categoriaId}")
-    public List<Examen> listarExamenesDeUnaCategoria(@PathVariable("categoriaId") Long categoriaId){
-        Categoria categoria = new Categoria();
-        categoria.setId(categoriaId);
-        return examenService.listarExamenesDeUnaCategoria(categoria);
-    }
+
 
     @GetMapping("/activo")
     public List<Examen> listarExamenesActivos(){
@@ -87,5 +94,13 @@ public class ExamenController {
         String username = principal.getName();
         List<Examen> examenes = examenService.obtenerExamenesPorUsuario(username);
         return ResponseEntity.ok(examenes);
+    }
+
+
+
+    @GetMapping("/categoria/{categoriaId}")
+    public ResponseEntity<List<Examen>> obtenerExamenesPorCategoria(@PathVariable Long categoriaId) {
+        List<Examen> examenes = examenService.obtenerExamenesPorCategoria(categoriaId);
+        return new ResponseEntity<>(examenes, HttpStatus.OK);
     }
 }

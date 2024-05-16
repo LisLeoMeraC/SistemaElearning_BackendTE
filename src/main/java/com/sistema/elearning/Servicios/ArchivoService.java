@@ -14,5 +14,7 @@ public interface ArchivoService {
     List<Archivo> obtenerArchivosPorCategoria(Long categoriaId);
 
     Archivo obtenerArchivoPorId(Long id);
+
+    List<Archivo> listarArchivos(String username);
 }
 

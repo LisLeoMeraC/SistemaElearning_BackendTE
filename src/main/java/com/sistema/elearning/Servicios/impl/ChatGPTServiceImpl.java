@@ -53,7 +53,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         System.out.println("Usando la API Key: " + openaiApiKey);
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "gpt-3.5-turbo");
+        body.put("model", "gpt-4-turbo");
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> message = new HashMap<>();
         message.put("role", "user");
@@ -91,7 +91,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         System.out.println("Usando la API Key: " + openaiApiKey);
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "gpt-3.5-turbo");
+        body.put("model", "gpt-4-turbo");
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> message = new HashMap<>();
         message.put("role", "user");
@@ -124,7 +124,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         System.out.println("Usando la API Key: " + openaiApiKey);
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "gpt-3.5-turbo");
+        body.put("model", "gpt-4-turbo");
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> message = new HashMap<>();
         message.put("role", "user");
