@@ -22,6 +22,7 @@ com\sistema\elearning\Servicios\UsuarioCategoriaService.class
 com\sistema\elearning\Servicios\ArchivoService.class
 com\sistema\elearning\Servicios\ChatGPTService.class
 com\sistema\elearning\entidades\Usuario.class
+com\sistema\elearning\entidades\usuarioActualizado.class
 com\sistema\elearning\Servicios\PreguntaService.class
 com\sistema\elearning\ServletInitializer.class
 com\sistema\elearning\controladores\ExamenController.class
